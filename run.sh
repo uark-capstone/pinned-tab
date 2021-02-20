@@ -1,4 +1,4 @@
 #!/bin/sh
 git pull
 npm install
-npm start
+HOST=0.0.0.0 npm run start
