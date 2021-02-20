@@ -1,4 +1,5 @@
 #!/bin/sh
 git pull
 npm install
-HOST=0.0.0.0 npm run start
+
+HOST=http://ct10.ddns.uark.edu npm run start
