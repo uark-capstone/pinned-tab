@@ -25,7 +25,7 @@ var WebcamCapture = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId: "af027@uark.edu",
+        userId: "1",
         lectureId: "1",
         ts:`${currentTime}`,
         base64String: webcamRef.current.getScreenshot()
