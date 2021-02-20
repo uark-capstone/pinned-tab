@@ -1,5 +1,6 @@
 #!/bin/sh
+git reset --hard HEAD
 git pull
-npm install
 
-HOST=http://ct10.ddns.uark.edu npm run start
+npm install
+npm run live
