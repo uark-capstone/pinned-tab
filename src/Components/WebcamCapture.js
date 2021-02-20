@@ -48,10 +48,9 @@ var WebcamCapture = () => {
         };
     
         // KEEP FOR SWITCHING BETWEEN LIVE AND LOCAL BACKEND URL
-        const LIVE_URL = process.env.BACKEND_URL;
+        const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
         let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
 
-        
         fetch(BACKEND_URL + 'AWS/image-from-extension', requestOptions)
           .then((res) => {
             console.log("res.status: ", res.status);
