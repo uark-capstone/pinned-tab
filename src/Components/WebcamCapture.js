@@ -1,4 +1,5 @@
 import React from "react";
+import {useEffect, useState} from "react"
 import Webcam from "react-webcam";
 
 // import { Link } from 'react-router-dom';
@@ -15,29 +16,77 @@ const videoConstraints = {
   facingMode: "user",
 };
 
+
+var dateFormat = require("dateformat");
+var now = new Date();
+
+
 var WebcamCapture = () => {
+  
+  const [imageSrc, setImageSrc]=useState("")
   const webcamRef = React.useRef(null);
 
 
 
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    console.log("Image Src: ", imageSrc);
-  }, [webcamRef]);
+
+    useEffect(() => {
+     
+      function sendImage() {
+      
+        setInterval(() =>  setImageSrc(webcamRef.current.getScreenshot()), 5000)
+     
+        var currentTime = dateFormat(now, "yyyy-mm-dd h:MM:ss");
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: "af027@uark.edu",
+            lectureId: "1",
+            ts:`${currentTime}`,
+            base64String:`${imageSrc}`
+          }),
+        };
+    
+        // KEEP FOR SWITCHING BETWEEN LIVE AND LOCAL BACKEND URL
+        const LIVE_URL = process.env.BACKEND_URL;
+        let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
+
+        
+        fetch(BACKEND_URL + 'AWS/image-from-extension', requestOptions)
+          .then((res) => {
+            console.log("res.status: ", res.status);
+            if (res.status === 200) {
+              var response = res.text();
+              console.log("RESPONSE", response);
+            }
+            if (res.status === 500) {
+              console.log("error ");
+            }
+          })
+          .catch((error) => console.log("HELLOOO", error));
+    
+    
+      }
+      sendImage();
+  }, [imageSrc])
+
+
+  
 
  // setInterval(capture(), 200000)
 
   return (
     <div>
       <Webcam
+      style={{position:"absolute", padding:"500px", marginTop:"-200px"}}
         audio={false}
-        height={720}
+        height={500}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={1280}
+        width={500}
         videoConstraints={videoConstraints}
       />
-      <button onClick={capture}>Capture photo</button>
+      {/* <button onClick={capture}>Capture photo</button> */}
 
       {/* {imageSrc && (
         <img
