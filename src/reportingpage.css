@@ -1,0 +1,72 @@
+
+:root {
+    /*Primary Colors: */
+    --red: #ff602a;
+    --blue: #2a48ff;
+    --pink: #d518d5;
+    --black: #000000;
+    --yellow: #ffdb00;
+
+}
+
+
+.navbar-brand {
+    color: var(--black);
+
+}
+
+.container-fluid {
+    color: var(--black);
+}
+.navbar {
+    color: var(--black);
+    background-color: var(--yellow);
+    height: 100px;
+}
+/* Page Styles*/
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+
+.panel {
+
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+}
+/* Button Styles */
+.chart {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    width: 400px;
+    height: 400px;
+}
+
+.dropdwn {
+    align-content: center;
+}
+/* Graph Styling*/
+
+#shadow {
+    width: 500px;
+    height: 500px;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.btn {
+    background-color: var(--black);
+    border: none;
+
+}
+
+.btn:hover {
+     background-color: var(--pink);
+     border: none;
+ }
+
+#dropdownMenu {
+    background-color: var(--red);
+    border: none;
+}

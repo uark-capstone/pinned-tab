@@ -4,7 +4,7 @@ import HowYouDid from './ Pages/HowYouDid';
 function App() {
   return (
   <div>
-    hello
+
     
     {/* <WebcamCapture/> */}
 <HowYouDid/> 
