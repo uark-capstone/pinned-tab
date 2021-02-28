@@ -1,6 +1,14 @@
 import React from "react";
 import {useEffect, useState} from "react"
 import Webcam from "react-webcam";
+var createGuest = require('cross-domain-storage/guest');
+var bazStorage = createGuest('http://localhost:3006/accessStorage');
+
+bazStorage.get('logged_in', function(error, value) {
+  // value for the key of 'fizz' will be retrieved from localStorage on www.baz.com
+  console.log("value:",  value)
+});
+
 
 const videoConstraints = {
   width: 1280,
