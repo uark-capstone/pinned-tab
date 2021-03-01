@@ -17,7 +17,7 @@ const HowYouDidPage = () => {
     emotions,
     isErrorAllEmotions,
     isLoadedAllEmotions,
-  } = useEmotionsByLecture("2");
+  } = useEmotionsByLecture("1");
   const {
     lectures,
     isAllLecturesError,
