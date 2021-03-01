@@ -1,6 +1,7 @@
-import React from "react";
-import {useEffect, useState} from "react"
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Webcam from "react-webcam";
+import useInterval from "../Hooks/useInterval";
 
 const videoConstraints = {
   width: 1280,
@@ -8,92 +9,67 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-
 var dateFormat = require("dateformat");
 var now = new Date();
 
-
 var WebcamCapture = () => {
-  
-  const [imageSrc, setImageSrc]=useState("")
-  const webcamRef = React.useRef(null);
+  const axios = require('axios');
+  const timerLength = 60000;
+  let { userId, lectureId } = useParams();
+  let [isTimer, setTimer] = useState(true);
 
-  function capture(e) {
-    console.log("Picture taken");
-    var currentTime = dateFormat(now, "yyyy-mm-dd h:MM:ss");
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: "1",
-        lectureId: "1",
-        ts:`${currentTime}`,
-        base64String: webcamRef.current.getScreenshot()
-      }),
-    };
+  let webcamRef = React.useRef(null);
 
+  function toggleTimer(e){
+    setTimer(!isTimer)
+  }
+
+  function addToImageQueue() {
+    console.log("sending Image")
     // KEEP FOR SWITCHING BETWEEN LIVE AND LOCAL BACKEND URL
     const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
     let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
 
-    fetch(BACKEND_URL + 'AWS/image-from-extension', requestOptions)
-      .then((res) => {
-        console.log("res.status: ", res.status);
-        if (res.status === 200) {
-          var response = res.text();
-          console.log("RESPONSE", response);
-        }
-        if (res.status === 500) {
-          console.log("error ");
-        }
-      })
-      .catch((error) => console.log("HELLOOO", error));
+    let currentTime = dateFormat(now, "yyyy-mm-dd h:MM:ss");
+    
+    try {
+      let data = {
+        userId: userId,
+        lectureId: lectureId,
+        ts: currentTime,
+        base64String: webcamRef.current.getScreenshot()
+      }
+  
+      axios
+        .post(BACKEND_URL + 'AWS/image-from-extension', data)
+        .then(response => {
+          console.log('Data added to Image Queue');
+          console.log(response)
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (e) {
+      console.warn(e)
+    }
   }
 
-  // useEffect(() => {
-  
-  //   function sendImage() {
-    
-  //     setInterval(() =>  setImageSrc(webcamRef.current.getScreenshot()), 5000)
-    
-  //     var currentTime = dateFormat(now, "yyyy-mm-dd h:MM:ss");
-  //     const requestOptions = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         userId: "af027@uark.edu",
-  //         lectureId: "1",
-  //         ts:`${currentTime}`,
-  //         base64String:`${imageSrc}`
-  //       }),
-  //     };
-  
-  //     // KEEP FOR SWITCHING BETWEEN LIVE AND LOCAL BACKEND URL
-  //     const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
-  //     let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
+  function capture(e){
+    addToImageQueue();
+  };
 
-  //     fetch(BACKEND_URL + 'AWS/image-from-extension', requestOptions)
-  //       .then((res) => {
-  //         console.log("res.status: ", res.status);
-  //         if (res.status === 200) {
-  //           var response = res.text();
-  //           console.log("RESPONSE", response);
-  //         }
-  //         if (res.status === 500) {
-  //           console.log("error ");
-  //         }
-  //       })
-  //       .catch((error) => console.log("HELLOOO", error));
-  
-  //   }
-
-  //   sendImage();
-  // }, [imageSrc])
-
- // setInterval(capture(), 200000)
+  useInterval(() => {
+    console.log(isTimer)
+    if(isTimer){
+      addToImageQueue();
+    }
+  }, timerLength);
 
   return (
     <div>
+      <h6>User ID: {userId}</h6>
+      <h6>Lecture ID: {lectureId}</h6>
+
       <Webcam
       // style={{position:"absolute", padding:"500px", marginTop:"-200px"}}
         audio={false}
@@ -103,14 +79,15 @@ var WebcamCapture = () => {
         width={500}
         videoConstraints={videoConstraints}
       />
+      <label htmlFor="isTimer">Toggle Timer</label>
+      <input
+        type="checkbox"
+        id="isTimer"
+        checked={isTimer}
+        label="timer on"
+        onChange={toggleTimer}
+      />
       <button onClick={capture}>Capture photo</button>
-
-      {/* {imageSrc && (
-        <img
-          src={imageSrc}
-        />
-      )} */}
-
     </div>
   );
 };
