@@ -12,23 +12,84 @@ import useGetAllLectures from "../Hooks/useGetAllLectures";
  * pass it!!
  */
 
+const randomComments = (
+  score,
+  possibleComments,
+  comments,
+  seed,
+  chartComment
+) => {
+  //More random comment-picking code. Once again, it's mostly for fun.//
+
+  if (score["CALM"] > 1) {
+    possibleComments.push(comments[1]);
+    possibleComments.push(comments[2]);
+    possibleComments.push(comments[5]);
+  }
+  if (score["SAD"] > 1) {
+    possibleComments.push(comments[7]);
+  }
+  if (score["HAPPY"] > 1) {
+    possibleComments.push(comments[3], comments[4]);
+  }
+  if (score["DISGUSTED"] > 1) {
+    possibleComments.push(comments[8]);
+  }
+  if (score["ANGRY"] > 1) {
+    possibleComments.push(comments[9]);
+  }
+
+  chartComment = possibleComments[seed % possibleComments.length];
+};
+
+const settingDictionaries = (
+  score,
+  emotions,
+  chartTicks,
+  chartData,
+  points
+) => {
+  var jsonData = emotions.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
+
+  for (var i = 0; i < jsonData.length; i++) {
+    //parsing time
+    var time = new Date(jsonData[i].timestamp).toLocaleTimeString("GMT", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    if (time.charAt(0) === "0") {
+      time = time.substring(1);
+    }
+    //keeping track of score
+    score[jsonData[i].emotions] += 1;
+
+    if (chartTicks.includes(time) === false) {
+      chartTicks.push(time);
+    }
+    chartData[jsonData[i].emotions][time]
+      ? (chartData[jsonData[i].emotions][time] += 1)
+      : (chartData[jsonData[i].emotions][time] = 1);
+
+    var keys = Object.keys(chartData);
+
+    keys.splice(keys.indexOf(jsonData[i].emotions), 1);
+    keys.forEach((item) => {
+      chartData[item][time]
+        ? (chartData[item][time] += 0)
+        : (chartData[item][time] = 0);
+    });
+  }
+
+  for (const [key, value] of Object.entries(chartData)) {
+    for (const [innerkey, innervalue] of Object.entries(chartData[key])) {
+      points[key].push(value[innerkey]);
+    }
+  }
+};
+
 const HowYouDidPage = () => {
-  const {
-    emotions,
-    isErrorAllEmotions,
-    isLoadedAllEmotions,
-  } = useEmotionsByLecture("1");
-  const {
-    lectures,
-    isAllLecturesError,
-    isAllLecturesLoaded,
-  } = useGetAllLectures();
-
-  console.log("lectures", lectures);
-  var jsonData = null;
-
-  jsonData = emotions.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
-
+  //VARIABLES
   var score = {
     HAPPY: 0,
     SAD: 0,
@@ -64,7 +125,6 @@ const HowYouDidPage = () => {
 
   // For timestamp, an ordered pair is assigned.//
   var dataPoints = {};
-
   var total = 0;
   var laughScore = 0;
   var surpriseScore = 0;
@@ -86,64 +146,23 @@ const HowYouDidPage = () => {
   var possibleComments = [];
   var chartTicks = [];
 
-  for (var i = 0; i < jsonData.length; i++) {
-    var time = new Date(jsonData[i].timestamp).toLocaleTimeString("GMT", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    if (time.charAt(0) === "0") {
-      time = time.substring(1);
-    }
-    score[jsonData[i].emotions] += 1;
-    if (chartTicks.includes(time) == false) {
-      chartTicks.push(time);
-    }
-
-    if (chartData[jsonData[i].emotions][time]) {
-      chartData[jsonData[i].emotions][time] += 1;
-    } else {
-      chartData[jsonData[i].emotions][time] = 1;
-    }
-
-    var keys = Object.keys(chartData);
-
-    keys.splice(keys.indexOf(jsonData[i].emotions), 1);
-    keys.forEach((item) => {
-      if (chartData[item][time]) {
-        chartData[item][time] += 0;
-      } else {
-        chartData[item][time] = 0;
-      }
-    });
-  }
-
-  for (const [key, value] of Object.entries(chartData)) {
-    for (const [innerkey, innervalue] of Object.entries(chartData[key])) {
-      points[key].push(value[innerkey]);
-    }
-  }
-
-  //More random comment-picking code. Once again, it's mostly for fun.//
-
-  if (score["CALM"] > 1) {
-    possibleComments.push(comments[1]);
-    possibleComments.push(comments[2]);
-    possibleComments.push(comments[5]);
-  }
-  if (score["SAD"] > 1) {
-    possibleComments.push(comments[7]);
-  }
-  if (score["HAPPY"] > 1) {
-    possibleComments.push(comments[3], comments[4]);
-  }
-  if (score["DISGUSTED"] > 1) {
-    possibleComments.push(comments[8]);
-  }
-  if (score["ANGRY"] > 1) {
-    possibleComments.push(comments[9]);
-  }
-
-  chartComment = possibleComments[seed % possibleComments.length];
+  const chartOptions = {
+    title: {
+      display: true,
+      text: chartComment,
+      fontColor: "black",
+      defaultFontFamily: "Roboto",
+      defaultFontSize: 14,
+    },
+    legend: {
+      display: true,
+      labels: {
+        font: {
+          family: "Roboto",
+        },
+      },
+    },
+  };
 
   const state = {
     responsive: true,
@@ -211,6 +230,23 @@ const HowYouDidPage = () => {
     ],
   };
 
+  //CALLING HOOKS
+  const {
+    emotions,
+    isErrorAllEmotions,
+    isLoadedAllEmotions,
+  } = useEmotionsByLecture("1");
+  const {
+    lectures,
+    isAllLecturesError,
+    isAllLecturesLoaded,
+  } = useGetAllLectures();
+
+  console.log("lectures", lectures);
+
+  settingDictionaries(score, emotions, chartTicks, chartData, points);
+  randomComments(score, possibleComments, comments, seed, chartComment);
+
   return (
     <div>
       <NavBar />
@@ -221,28 +257,7 @@ const HowYouDidPage = () => {
           align="center"
         >
           <div className="chart">
-            <Line
-              width="1"
-              height="1"
-              data={state}
-              options={{
-                title: {
-                  display: true,
-                  text: chartComment,
-                  fontColor: "black",
-                  defaultFontFamily: "Roboto",
-                  defaultFontSize: 14,
-                },
-                legend: {
-                  display: true,
-                  labels: {
-                    font: {
-                      family: "Roboto",
-                    },
-                  },
-                },
-              }}
-            />
+            <Line width="1" height="1" data={state} options={chartOptions} />
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdownMenu">

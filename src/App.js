@@ -1,34 +1,41 @@
-import './App.css';
+import "./App.css";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
 } from "react-router-dom";
 
-import WebcamCapture from './Components/WebcamCapture';
-import HowYouDid from './ Pages/HowYouDidPage';
+import WebcamCapture from "./Components/WebcamCapture";
+import HowYouDid from "./ Pages/HowYouDidPage";
+import SignIn from "./ Pages/SignIn";
 
 function App() {
   return (
     <Router>
       <div>
-        <ul>  
+        <ul>
           <li>
             <Link to="/monitor/1/1">Webcam for user 1, lecture 1</Link>
           </li>
           <li>
             <Link to="/graph">How you did page</Link>
           </li>
+          <li>
+            <Link to="/signIn">Sign In</Link>
+          </li>
         </ul>
 
         <Switch>
           <Route path="/monitor/:userId/:lectureId">
-            <WebcamCapture/>
+            <WebcamCapture />
           </Route>
           <Route path="/graph">
-            <HowYouDid/>
+            <HowYouDid />
+          </Route>
+          <Route path="/signIn">
+            <SignIn />
           </Route>
         </Switch>
       </div>
