@@ -1,5 +1,13 @@
 # pinned-tab
 
+Local Routes
+- [http://localhost:3000/graph](http://localhost:3000/graph)
+- [http://localhost:3000/1/1](http://localhost:3000/USER_ID/LECTURE_ID)
+
+Live Routes
+- [https://ct10.ddns.uark.edu:5001/graph](https://ct10.ddns.uark.edu:5001/graph)
+- [https://ct10.ddns.uark.edu:5001/1/1](https://ct10.ddns.uark.edu:5001/USER_ID/LECTURE_ID)
+
 ### Local
 
 ```
