@@ -6,8 +6,8 @@ function App() {
   <div>
 
     
-    {/* <WebcamCapture/> */}
-<HowYouDid/> 
+    <WebcamCapture/>
+{/* <HowYouDid/>  */}
   </div>
   );
 }
