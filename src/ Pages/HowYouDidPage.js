@@ -36,7 +36,7 @@ const HowYouDidPage = () => {
     DISGUSTED: 0,
     SURPRISED: 0,
     CALM: 0,
-    UNKNOWN: 0,
+    FEAR: 0,
     ANGRY: 0,
   };
 
@@ -47,7 +47,7 @@ const HowYouDidPage = () => {
     DISGUSTED: {},
     SURPRISED: {},
     CALM: {},
-    UNKNOWN: {},
+    FEAR: {},
     ANGRY: {},
   };
 
@@ -58,7 +58,7 @@ const HowYouDidPage = () => {
     DISGUSTED: [],
     SURPRISED: [],
     CALM: [],
-    UNKNOWN: [],
+    FEAR: [],
     ANGRY: [],
   };
 
@@ -193,7 +193,7 @@ const HowYouDidPage = () => {
       },
 
       {
-        data: points["UNKNOWN"],
+        data: points["FEAR"],
         label: "Other",
         backgroundColor: "orange",
         borderColor: "orange",
