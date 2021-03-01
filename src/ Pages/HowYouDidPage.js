@@ -37,7 +37,7 @@ const HowYouDidPage = () => {
     SURPRISED: 0,
     CALM: 0,
     UNKNOWN: 0,
-    FEAR: 0,
+    ANGRY: 0,
   };
 
   var chartData = {
@@ -48,7 +48,7 @@ const HowYouDidPage = () => {
     SURPRISED: {},
     CALM: {},
     UNKNOWN: {},
-    FEAR: {},
+    ANGRY: {},
   };
 
   var points = {
@@ -59,7 +59,7 @@ const HowYouDidPage = () => {
     SURPRISED: [],
     CALM: [],
     UNKNOWN: [],
-    FEAR: [],
+    ANGRY: [],
   };
 
   // For timestamp, an ordered pair is assigned.//
@@ -139,7 +139,7 @@ const HowYouDidPage = () => {
   if (score["DISGUSTED"] > 1) {
     possibleComments.push(comments[8]);
   }
-  if (score["FEAR"] > 1) {
+  if (score["ANGRY"] > 1) {
     possibleComments.push(comments[9]);
   }
 
