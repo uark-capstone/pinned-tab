@@ -4,17 +4,30 @@ import { Line } from "react-chartjs-2";
 import NavBar from "../Components/NavigationBar";
 import "../reportingpage.css";
 import { Dropdown } from "react-bootstrap";
+import useEmotionsByLecture from "../Hooks/useEmotionsByLecture";
+import useGetAllLectures from "../Hooks/useGetAllLectures";
+
 /**
  * Refer here for the library https://www.npmjs.com/package/react-chartjs-2 and you can see all the props you can
  * pass it!!
  */
 
-const HowYouDid = () => {
-  var json =
-    '[    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-16T22:38:51.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:25:59.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:25:59.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:33:40.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:33:41.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:39:02.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:39:02.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:43:05.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:43:06.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:44:05.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:44:06.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "CALM",        "percent": 93.03009796142578,        "timestamp": "2021-02-20T21:44:32.000+00:00",        "user_id": 1,        "lecture_id": 2    },    {        "emotions": "SAD",        "percent": 5.095884799957275,        "timestamp": "2021-02-20T21:44:32.000+00:00",        "user_id": 1,        "lecture_id": 2    }]';
-  var jsonData = JSON.parse(json);
+const HowYouDidPage = () => {
+  const {
+    emotions,
+    isErrorAllEmotions,
+    isLoadedAllEmotions,
+  } = useEmotionsByLecture("2");
+  const {
+    lectures,
+    isAllLecturesError,
+    isAllLecturesLoaded,
+  } = useGetAllLectures();
 
-  jsonData = jsonData.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
+  console.log("lectures", lectures);
+  var jsonData = null;
+
+  jsonData = emotions.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
 
   var score = {
     HAPPY: 0,
@@ -103,14 +116,12 @@ const HowYouDid = () => {
       }
     });
   }
-  console.log(chartData);
 
   for (const [key, value] of Object.entries(chartData)) {
     for (const [innerkey, innervalue] of Object.entries(chartData[key])) {
       points[key].push(value[innerkey]);
     }
   }
-  console.log(chartData);
 
   //More random comment-picking code. Once again, it's mostly for fun.//
 
@@ -237,11 +248,12 @@ const HowYouDid = () => {
             <Dropdown.Toggle variant="success" id="dropdownMenu">
               Session
             </Dropdown.Toggle>
-
             <Dropdown.Menu className="dropdown-menu">
-              <Dropdown.Item href="#/action-1">02/13/21</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">02/14/21</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">02/14/21</Dropdown.Item>
+              {lectures.map((eachLecture, idx) => (
+                <Dropdown.Item key={idx}>
+                  {eachLecture.lectureName}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </div>
@@ -250,4 +262,4 @@ const HowYouDid = () => {
   );
 };
 
-export default HowYouDid;
+export default HowYouDidPage;

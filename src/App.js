@@ -1,6 +1,6 @@
 import './App.css';
 import WebcamCapture from './Components/WebcamCapture';
-import HowYouDid from './ Pages/HowYouDid';
+import HowYouDid from './ Pages/HowYouDidPage';
 function App() {
   return (
   <div>
