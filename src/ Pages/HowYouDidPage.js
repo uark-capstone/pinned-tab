@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import NavBar from "../Components/NavigationBar";
 import "../reportingpage.css";
 import { Dropdown } from "react-bootstrap";
 import useEmotionsByLecture from "../Hooks/useEmotionsByLecture";
@@ -89,6 +88,8 @@ const settingDictionaries = (
 };
 
 const HowYouDidPage = () => {
+  const [lectureID, setLectureID] = useState(105); // defaults to 'lecture begin'
+
   //VARIABLES
   var score = {
     HAPPY: 0,
@@ -235,21 +236,24 @@ const HowYouDidPage = () => {
     emotions,
     isErrorAllEmotions,
     isLoadedAllEmotions,
-  } = useEmotionsByLecture("1");
+  } = useEmotionsByLecture(lectureID);
   const {
     lectures,
     isAllLecturesError,
     isAllLecturesLoaded,
   } = useGetAllLectures();
 
-  console.log("lectures", lectures);
-
   settingDictionaries(score, emotions, chartTicks, chartData, points);
   randomComments(score, possibleComments, comments, seed, chartComment);
 
+  useEffect(() =>{
+    settingDictionaries(score, emotions, chartTicks, chartData, points);
+    randomComments(score, possibleComments, comments, seed, chartComment);
+  }, [emotions])
+  
+
   return (
     <div>
-      <NavBar />
       <div className="d-flex justify-content-center">
         <div
           className="shadow p-3 mb-5 bg-white rounded w-50 "
@@ -265,7 +269,9 @@ const HowYouDidPage = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-menu">
               {lectures.map((eachLecture, idx) => (
-                <Dropdown.Item key={idx}>
+                <Dropdown.Item 
+                  key={idx}
+                  onClick={(e) => setLectureID(eachLecture.id)}>
                   {eachLecture.lectureName}
                 </Dropdown.Item>
               ))}

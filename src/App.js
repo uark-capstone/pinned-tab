@@ -7,6 +7,7 @@ import {
   useParams,
 } from "react-router-dom";
 
+import NavBar from "./Components/NavigationBar";
 import WebcamCapture from "./Components/WebcamCapture";
 import HowYouDid from "./ Pages/HowYouDidPage";
 import SignIn from "./ Pages/SignIn";
@@ -15,18 +16,7 @@ function App() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/monitor/1/1">Webcam for user 1, lecture 1</Link>
-          </li>
-          <li>
-            <Link to="/graph">How you did page</Link>
-          </li>
-          <li>
-            <Link to="/signIn">Sign In</Link>
-          </li>
-        </ul>
-
+        <NavBar />
         <Switch>
           <Route path="/monitor/:userId/:lectureId">
             <WebcamCapture />
