@@ -61,6 +61,17 @@ var PredictionTraining = () => {
         .post(ML_URL + 'predict', data)
         .then(response => {
           console.log('Predicted Response: ', response.data);
+
+          let p = [
+            'Not listening',
+            'Neutral',
+            'Actively Listening'
+          ]
+
+          window.alert('The predicted response was: ' + 
+            p[parseInt(response.data.result)] + 
+            ' (' + response.data.result + ')'
+          )
         })
         .catch(error => {
           console.error(error);
