@@ -3,7 +3,10 @@ import {React, useEffect, useState} from 'react';
 
 const useGetAllLectures = () => {
     const axios = require('axios');
-    const [url, setUrl]= useState("http://ct10.ddns.uark.edu:8080/lecture/getAllLectures")
+
+    const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+    let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
+
     const [lectures, setLectures] = useState([]);
     const [isAllLecturesLoaded, setIsLoaded] = useState(false);
     const [isAllLecturesError, setError] = useState(null);
@@ -11,7 +14,7 @@ const useGetAllLectures = () => {
     useEffect(() => {
       const fetchData = () => {
         axios
-          .get(url)
+          .get(BACKEND_URL + 'lecture/getAllLectures')
           .then(response => {
             setIsLoaded(true);
             setLectures(response.data);
