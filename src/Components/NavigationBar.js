@@ -40,6 +40,7 @@ const NavigationBar = () => {
             <Dropdown.Item href="#">Report Error</Dropdown.Item> */}
             <Dropdown.Item href="/graph">Graphing Page</Dropdown.Item>
             <Dropdown.Item href="/monitor/1/105">Webcam WebcamCapture</Dropdown.Item>
+            <Dropdown.Item href="/predict/training">Prediction Model Training</Dropdown.Item>
             <Dropdown.Item href="/signIn">Sign In</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

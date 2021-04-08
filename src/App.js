@@ -8,9 +8,10 @@ import {
 } from "react-router-dom";
 
 import NavBar from "./Components/NavigationBar";
-import WebcamCapture from "./Components/WebcamCapture";
-import HowYouDid from "./ Pages/HowYouDidPage";
-import SignIn from "./ Pages/SignIn";
+import CapturePage from "./Pages/CapturePage";
+import HowYouDid from "./Pages/HowYouDidPage";
+import SignIn from "./Pages/SignIn";
+import PredictionTraining from "./Pages/PredictionTraining"
 
 function App() {
   return (
@@ -19,7 +20,10 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/monitor/:userId/:lectureId">
-            <WebcamCapture />
+            <CapturePage />
+          </Route>
+          <Route path="/predict/training">
+            <PredictionTraining />
           </Route>
           <Route path="/graph">
             <HowYouDid />
