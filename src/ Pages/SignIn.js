@@ -6,6 +6,10 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onSubmit = (e)=>{
+    
+  }
+
   
   return (
     <div style={{ width: "50%" }}>
@@ -25,7 +29,7 @@ const SignIn = () => {
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={onSubmit}>
           Submit
         </Button>
       </Form>

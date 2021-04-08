@@ -41,6 +41,7 @@ const NavigationBar = () => {
             <Dropdown.Item href="/graph">Graphing Page</Dropdown.Item>
             <Dropdown.Item href="/monitor/1/105">Webcam WebcamCapture</Dropdown.Item>
             <Dropdown.Item href="/signIn">Sign In</Dropdown.Item>
+            <Dropdown.Item href="/TeacherPage">Teacher page</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Navbar>

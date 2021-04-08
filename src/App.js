@@ -11,6 +11,7 @@ import NavBar from "./Components/NavigationBar";
 import WebcamCapture from "./Components/WebcamCapture";
 import HowYouDid from "./ Pages/HowYouDidPage";
 import SignIn from "./ Pages/SignIn";
+import TeacherPage from "./ Pages/TeacherPage";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route path="/monitor/:userId/:lectureId">
             <WebcamCapture />
+          </Route>
+          <Route path="/teacherPage">
+            <TeacherPage />
           </Route>
           <Route path="/graph">
             <HowYouDid />
