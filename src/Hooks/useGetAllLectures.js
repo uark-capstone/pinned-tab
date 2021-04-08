@@ -11,20 +11,19 @@ const useGetAllLectures = () => {
     const [isAllLecturesLoaded, setIsLoaded] = useState(false);
     const [isAllLecturesError, setError] = useState(null);
   
-    useEffect(() => {
-      const fetchData = () => {
-        axios
-          .get(BACKEND_URL + 'lecture/getAllLectures')
-          .then(response => {
-            setIsLoaded(true);
-            setLectures(response.data);
-          })
-          .catch(error => {
-            setError(error);
-          });
-      };
-      fetchData();
-    }, [url]);
+    const fetchData = () => {
+      axios
+        .get(BACKEND_URL + 'lecture/getAllLectures')
+        .then(response => {
+          setIsLoaded(true);
+          setLectures(response.data);
+        })
+        .catch(error => {
+          setError(error);
+        });
+    };
+
+    fetchData();
   
     return { isAllLecturesError, isAllLecturesLoaded, lectures };
   };
