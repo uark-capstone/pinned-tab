@@ -12,28 +12,32 @@
 
 .navbar-brand {
     color: var(--black);
-
+    border-radius: 0px;
 }
 
 .container-fluid {
+    border-radius: 0px 0px 90px 0px;
     color: var(--black);
+
 }
 .navbar {
     color: var(--black);
     background-color: var(--yellow);
     height: 100px;
+    border-radius: 0px;
 }
 /* Page Styles*/
 
 body {
+
     font-family: 'Roboto', sans-serif;
     background-color: white;
 }
 
 .panel {
-
     font-family: 'Roboto', sans-serif;
     background-color: white;
+    border-radius: 0px 0px 90px 0px;
 }
 /* Button Styles */
 .chart {
@@ -41,14 +45,17 @@ body {
     background-color: white;
     width: 400px;
     height: 400px;
+    border-radius: 0px 0px 90px 0px;
 }
 
 .dropdwn {
     align-content: center;
+    border-radius: 0px;
 }
 /* Graph Styling*/
 
 #shadow {
+    
     width: 500px;
     height: 500px;
     min-width: 500px;
@@ -56,17 +63,47 @@ body {
 }
 
 .btn {
+    outline: none;
     background-color: var(--black);
+    border-radius: 0;
     border: none;
+    outline: none;
 
 }
 
 .btn:hover {
      background-color: var(--pink);
+     border-radius: 5px;
      border: none;
+     outline: none;
  }
+
+ .btn:focus , .btn:active{
+    background-color: var(--pink);
+    border-radius: 5px;
+    border: none;
+    outline-style: none;
+    outline: none;
+
+}
+
+
+
 
 #dropdownMenu {
     background-color: var(--red);
+    border-radius: 0px;
     border: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    outline: none;
+}
+
+
+#dropdownMenu:hover {
+    background-color: var(--black);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
 }
