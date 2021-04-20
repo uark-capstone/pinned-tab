@@ -13,8 +13,13 @@ const useEmotionsByLecture = (lecture_id) => {
   
     useEffect(() => {
       const fetchData = () => {
+        const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+       // let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
+
+        let url = `${LIVE_URL}emotion/getEmotionsByLecture?lecture_id=`+lecture_id
+        console.log("emotuions", url)
         axios
-          .get(BACKEND_URL + 'emotion/getEmotionsByLecture?lecture_id=' + lecture_id)
+          .get(LIVE_URL + 'emotion/getEmotionsByLecture?lecture_id=' + lecture_id)
           .then(response => {
             setIsLoaded(true);
             setEmotions(response.data);
