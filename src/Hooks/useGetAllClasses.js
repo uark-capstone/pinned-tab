@@ -1,13 +1,14 @@
 import {React, useEffect, useState} from 'react';
 
 
-const useGetAllClasses = () => {
+const useGetAllClasses = (professorID) => {
     const axios = require('axios');
     //diff
-    const [url, setUrl]= useState("http://ct10.ddns.uark.edu:8080/user/getUserByEmail?email=af027@uark.edu")
-    const [lectures, setLectures] = useState([]);
-    const [isAllLecturesLoaded, setIsLoaded] = useState(false);
-    const [isAllLecturesError, setError] = useState(null);
+
+    const [url, setUrl]= useState(`http://127.0.0.1:8080/class/getClassesByProfessorID?professorid=${professorID}`)
+    const [classes, setClasses] = useState([]);
+    const [isClassesLoaded, setIsLoaded] = useState(false);
+    const [isClassesError, setError] = useState(null);
   
     useEffect(() => {
       const fetchData = () => {
@@ -15,7 +16,7 @@ const useGetAllClasses = () => {
           .get(url)
           .then(response => {
             setIsLoaded(true);
-            setLectures(response.data);
+            setClasses(response.data);
           })
           .catch(error => {
             setError(error);
@@ -24,7 +25,7 @@ const useGetAllClasses = () => {
       fetchData();
     }, [url]);
   
-    return { isAllLecturesError, isAllLecturesLoaded, lectures };
+    return { isClassesError, isClassesLoaded, classes };
   };
 
   export default useGetAllClasses;

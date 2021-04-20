@@ -40,6 +40,8 @@ var WebcamCapture = () => {
         ts: currentTime,
         base64String: webcamRef.current.getScreenshot()
       }
+
+      localStorage.setItem('userID', data.userId);
   
       axios
         .post(BACKEND_URL + 'AWS/image-from-extension', data)

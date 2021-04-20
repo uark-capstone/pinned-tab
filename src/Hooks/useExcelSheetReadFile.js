@@ -1,19 +1,16 @@
 import {React, useEffect, useState} from 'react';
 
-
-const useExcelSheetReadFile = (formData,) => {
-
-
-    const [selectedFile, setSelectedFile] = useState();
-	const [isSelected, setIsSelected] = useState(false);
-
+///user/uploadUsers
+//classRoster/uploadClassRoster
+const useExcelSheetReadFile = (formData,  path) => {
+   
     const [result, setResult] = useState("");
     const [error, setError] = useState("");
-  
+	const URL= "http://127.0.0.1:8080/classRoster/uploadClassRoster"
     useEffect(() => {
       const fetchData = () => {
         fetch(
-			'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
+			"http://127.0.0.1:8080/classRoster/uploadClassRoster",
 			{
 				method: 'POST',
 				body: formData,
@@ -21,7 +18,7 @@ const useExcelSheetReadFile = (formData,) => {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-                setResult(result)
+                setResult("Woo!! "+result)
 				console.log('Success:', result);
 			})
 			.catch((error) => {
