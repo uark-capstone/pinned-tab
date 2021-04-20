@@ -50,41 +50,41 @@ const settingDictionaries = (
 ) => {
   var jsonData = emotions.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
 
-  for (var i = 0; i < jsonData.length; i++) {
-    //parsing time
-    var time = new Date(jsonData[i].timestamp).toLocaleTimeString("GMT", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  // for (var i = 0; i < jsonData.length; i++) {
+  //   //parsing time
+  //   var time = new Date(jsonData[i].timestamp).toLocaleTimeString("GMT", {
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //   });
 
-    if (time.charAt(0) === "0") {
-      time = time.substring(1);
-    }
-    //keeping track of score
-    score[jsonData[i].emotions] += 1;
+  //   if (time.charAt(0) === "0") {
+  //     time = time.substring(1);
+  //   }
+  //   //keeping track of score
+  //   score[jsonData[i].emotions] += 1;
 
-    if (chartTicks.includes(time) === false) {
-      chartTicks.push(time);
-    }
-    chartData[jsonData[i].emotions][time]
-      ? (chartData[jsonData[i].emotions][time] += 1)
-      : (chartData[jsonData[i].emotions][time] = 1);
+  //   if (chartTicks.includes(time) === false) {
+  //     chartTicks.push(time);
+  //   }
+  //   chartData[jsonData[i].emotions][time]
+  //     ? (chartData[jsonData[i].emotions][time] += 1)
+  //     : (chartData[jsonData[i].emotions][time] = 1);
 
-    var keys = Object.keys(chartData);
+  //   var keys = Object.keys(chartData);
 
-    keys.splice(keys.indexOf(jsonData[i].emotions), 1);
-    keys.forEach((item) => {
-      chartData[item][time]
-        ? (chartData[item][time] += 0)
-        : (chartData[item][time] = 0);
-    });
-  }
+  //   keys.splice(keys.indexOf(jsonData[i].emotions), 1);
+  //   keys.forEach((item) => {
+  //     chartData[item][time]
+  //       ? (chartData[item][time] += 0)
+  //       : (chartData[item][time] = 0);
+  //   });
+  // }
 
-  for (const [key, value] of Object.entries(chartData)) {
-    for (const [innerkey, innervalue] of Object.entries(chartData[key])) {
-      points[key].push(value[innerkey]);
-    }
-  }
+  // for (const [key, value] of Object.entries(chartData)) {
+  //   for (const [innerkey, innervalue] of Object.entries(chartData[key])) {
+  //     points[key].push(value[innerkey]);
+  //   }
+  // }
 };
 
 const HowYouDidPage = () => {

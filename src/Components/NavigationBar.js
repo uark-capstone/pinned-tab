@@ -3,19 +3,12 @@ import { useEffect, useState } from "react";
 import {
   Navbar,
   Nav,
-  NavDropdown,
-  Button,
-  FormControl,
-  Form,
   Dropdown,
 } from "react-bootstrap";
 import Logo from "../Utils/Images/logo_large.png";
 import "../reportingpage.css";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 
@@ -48,6 +41,7 @@ const NavigationBar = () => {
 
       <Dropdown.Menu className="dropdown-menu dropdown-menu-right shadow-lg">
         <Dropdown.Item href="/graph">Graphing Page</Dropdown.Item>
+        <Dropdown.Item href="/predict/training">Prediction Training</Dropdown.Item>
         <Dropdown.Item href="/monitor/1/105"> WebcamCapture</Dropdown.Item>
         <Dropdown.Item href="/TeacherPage">Teacher page</Dropdown.Item>
         <Dropdown.Item onClick={handleClick}> Sign Out</Dropdown.Item>
