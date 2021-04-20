@@ -1,9 +1,11 @@
 import {React, useEffect, useState} from 'react';
 
 
-const useGetAllLecturesById = (classID) => {
+const useGetAllLecturesById = (class_id) => {
     const axios = require('axios');
-    const [url, setUrl]= useState(`http://127.0.0.1:8080/lecture/getAllLecturesbyID?class_id=${classID}`)
+    const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+    const [classID, setClassID] = useState(class_id);
+    const [url, setUrl]= useState(`${LIVE_URL}lecture/getAllLecturesbyID?class_id=${classID}`)
     const [lecturesById, setLectures] = useState([]);
     const [isAllLecturesByIdLoaded, setIsLoaded] = useState(false);
     const [isAllLecturesByIdError, setError] = useState(null);
@@ -22,7 +24,7 @@ const useGetAllLecturesById = (classID) => {
           });
       };
       fetchData();
-    }, [classID]);
+    }, [url, axios]);
   
     return { isAllLecturesByIdError, isAllLecturesByIdLoaded, lecturesById };
   };

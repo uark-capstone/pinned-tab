@@ -6,11 +6,12 @@ const useExcelSheetReadFile = (formData,  path) => {
    
     const [result, setResult] = useState("");
     const [error, setError] = useState("");
-	const URL= "http://127.0.0.1:8080/classRoster/uploadClassRoster"
+	const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+	const URL= `${LIVE_URL}classRoster/uploadClassRoster`
     useEffect(() => {
       const fetchData = () => {
         fetch(
-			"http://127.0.0.1:8080/classRoster/uploadClassRoster",
+			`${URL}`,
 			{
 				method: 'POST',
 				body: formData,

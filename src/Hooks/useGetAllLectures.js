@@ -3,7 +3,9 @@ import {React, useEffect, useState} from 'react';
 
 const useGetAllLectures = () => {
     const axios = require('axios');
-    const [url, setUrl]= useState("http://ct10.ddns.uark.edu:8080/lecture/getAllLectures")
+    const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+    const urlFinal= `${LIVE_URL}lecture/getAllLectures`
+    const [url, setUrl]= useState(urlFinal)
     const [lectures, setLectures] = useState([]);
     const [isAllLecturesLoaded, setIsLoaded] = useState(false);
     const [isAllLecturesError, setError] = useState(null);

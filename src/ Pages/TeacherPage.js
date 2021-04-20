@@ -57,6 +57,15 @@ const TeacherPage = () => {
   const CREATE_LECTURE = (
     <div>
       <form className={classes.container} noValidate>
+      <TextField
+          label="Lecture Name"
+          type="text"
+          defaultValue="2017-05-24T10:30"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         <TextField
           id="datetime-local"
           label="Next appointment"
@@ -84,6 +93,7 @@ const TeacherPage = () => {
             shrink: true,
           }}
         />
+       
         <input type="submit" value="Submit"></input>
       </form>
     </div>
@@ -108,7 +118,7 @@ const TeacherPage = () => {
         <div>
           <Button
             variant="contained"
-            onClicke={importStudentsClicked}
+            onClicked={importStudentsClicked}
             color="primary"
           >
             Import Students

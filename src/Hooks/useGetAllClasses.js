@@ -4,8 +4,8 @@ import {React, useEffect, useState} from 'react';
 const useGetAllClasses = (professorID) => {
     const axios = require('axios');
     //diff
-
-    const [url, setUrl]= useState(`http://127.0.0.1:8080/class/getClassesByProfessorID?professorid=${professorID}`)
+    const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+    const [url, setUrl]= useState(`${LIVE_URL}class/getClassesByProfessorID?professorid=${professorID}`)
     const [classes, setClasses] = useState([]);
     const [isClassesLoaded, setIsLoaded] = useState(false);
     const [isClassesError, setError] = useState(null);
