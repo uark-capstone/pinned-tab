@@ -18,7 +18,7 @@ import TeacherPage from "./Pages/TeacherPage";
 function App() {
   return (
     <Router>
-      <div>
+      <div class = "app">
         <NavBar />
         <Switch>
           <Route path="/monitor/:userId/:lectureId">

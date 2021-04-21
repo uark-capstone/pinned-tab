@@ -1,3 +1,4 @@
+import "./navbar.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import {
@@ -18,6 +19,7 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+
 
 const NavigationBar = () => {
   
@@ -46,19 +48,20 @@ const NavigationBar = () => {
         ☰
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="dropdown-menu dropdown-menu-right shadow-lg">
+      <Dropdown.Menu id= "dropdown" className="dropdown-menu dropdown-menu-right">
         <Dropdown.Item href="/graph">Graphing Page</Dropdown.Item>
-        <Dropdown.Item href="/monitor/1/105"> WebcamCapture</Dropdown.Item>
+        <Dropdown.Item href="/monitor/1/105"> Webcam Capture</Dropdown.Item>
         <Dropdown.Item href="/TeacherPage">Teacher page</Dropdown.Item>
         <Dropdown.Item onClick={handleClick}> Sign Out</Dropdown.Item>
     
       </Dropdown.Menu>
     </Dropdown>
   );
+  
 
   const NAV_BAR = (
     <div>
-      <Navbar className="navbar container-fluid navbar-default shadow p-3 mb-5 rounded">
+      <Navbar id = "nav" className="navbar container-fluid navbar-default mb-5">
         <Nav className="mr-auto">
           <Navbar.Brand href="/graph">
             <img

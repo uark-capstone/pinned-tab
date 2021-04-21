@@ -107,3 +107,7 @@
   border-color: var(--pink)
 }
 
+#video {
+  background-color: #d518d5;
+  border-radius: 0px 30px 0px 30px;
+}
