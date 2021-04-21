@@ -1,0 +1,71 @@
+:root {
+    /*Primary Colors: */
+    --red: #ff602a;
+    --blue: #2a48ff;
+    --pink: #d518d5;
+    --black: #000000;
+    --yellow: #ffdb00;
+  
+  }
+
+#nav {
+    border-radius: 0px 0px 20px 20px;
+box-shadow: var(--pink) 0px 20px 0px 0px;
+border-color: black;
+}
+
+#nav:hover {
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: var(--pink) 0px 20px 0px 0px;
+    border-color: black;
+
+}
+
+#dropdown{
+    color:white;
+    font-family: 'Roboto' sans-serif;
+    border-radius: 10px 0px 10px 0px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+    background-color: var(--red);
+    border-width: 0px;
+}
+#dropdown:hover{
+    color:white;
+    font-family: 'Roboto' sans-serif;
+    border-radius: 10px 0px 10px 0px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+    background-color: var(--red);
+    border-width: 0px;
+}
+
+.dropdown-item {
+    color:white;
+
+}
+.dropdown-item:hover {
+    
+   border-radius: 20px 0px 20px 0px;  
+   transition-timing-function: ease-in;  
+   background-color: darkorange;
+   color: whitesmoke;
+}
+
+#dropdownMenu{
+    font-family: 'Roboto', sans-serif;
+    border-radius: 10px 0px 10px 0px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+    border-color: black;
+}
+#dropdownMenu:hover{
+    font-family: 'Roboto', sans-serif;
+    border-radius: 5px 0px 5px 0px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: black;
+}
+#dropdownMenu:focus{
+        font-family: 'Roboto', sans-serif;
+    border-radius: 5px 0px 0px 0px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: var(--red);
+}
+

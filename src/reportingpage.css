@@ -11,14 +11,17 @@
 
 
 .navbar-brand {
+    font-family: 'Roboto', sans-serif;
     color: var(--black);
 
 }
 
 .container-fluid {
+    font-family: 'Roboto', sans-serif;
     color: var(--black);
 }
 .navbar {
+    font-family: 'Roboto', sans-serif;
     color: var(--black);
     background-color: var(--yellow);
     height: 100px;
@@ -44,8 +47,10 @@ body {
 }
 
 .dropdwn {
+    font-family: 'Roboto', sans-serif;
     align-content: center;
 }
+
 /* Graph Styling*/
 
 #shadow {
@@ -56,17 +61,114 @@ body {
 }
 
 .btn {
-    background-color: var(--black);
+
+    font-family: 'Roboto', sans-serif;
     border: none;
 
 }
 
+
 .btn:hover {
+     font-family: 'Roboto', sans-serif;
      background-color: var(--pink);
      border: none;
  }
+ 
 
 #dropdownMenu {
+    font-family: 'Roboto', sans-serif;
     background-color: var(--red);
     border: none;
+}
+
+#dropup{
+    background-color: var(--red);
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px 10px 0px 10px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: black;
+}
+#dropup:hover{
+    background-color: var(--red);
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: black;
+}
+#dropup:focus{
+    background-color: var(--red);
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: black;
+}
+#dropup:active{
+    background-color: var(--red);
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: var(--pink) 0px 4px 0px 0px;
+    border-color: black;
+}
+
+#dropup-menu{
+    background-color: var(--red);
+    color: white;
+    border-radius: 10px 10px 10px 0px;
+    border-color: var(--red);
+    border-width: 20px;
+}
+
+#import{
+    background-color: var(--red);
+    color: white;
+    border-radius: 10px 0px 0px 0px;
+    border-color: var(--red);
+    border-width: 20px;
+    box-shadow: var(--pink) 0px 0px 0px 0px;
+
+}
+#plus{
+    background-color: var(--yellow);
+    color: teal;
+    border-radius: 0px 0px 10px 0px;
+    border-width: 0px;
+    box-shadow: var(--pink) 0px 0px 0px 0px;
+    font-size: small;
+    width: fit-content;
+    height: auto;
+}
+#import:hover{
+    background-color: var(--red);
+    color: white;
+    border-radius: 10px 0px 0px 0px;
+    border-color: var(--red);
+    border-width: 20px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+
+}
+#plus:hover{
+    background-color: var(--yellow);
+    color: teal;
+    border-radius: 0px 0px 10px 0px;
+    border-width: 0px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+    font-size: small;
+    width: fit-content;
+    height: auto;
+
+}
+
+#spaced
+{
+    background-color: orange;
+    color:black;
+    border-radius: 0px 0px 10px 0px;
+    border-width: 0px;
+    box-shadow: var(--pink) 0px 10px 0px 0px;
+    font-size: small;
+    width: fit-content;
+    height: auto;  
+    margin: 20 px;
+    margin-bottom: 30px;
+    padding: 10px;
 }

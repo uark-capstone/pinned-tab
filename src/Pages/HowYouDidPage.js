@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import "../reportingpage.css";
 import { Dropdown } from "react-bootstrap";
+import "../reportingpage.css";
 import useEmotionsByLecture from "../Hooks/useEmotionsByLecture";
 import useGetAllLectures from "../Hooks/useGetAllLectures";
 import Chart from 'chart.js'
@@ -192,10 +192,10 @@ const HowYouDidPage = () => {
         >
           <canvas id="myChart" width="1" height="1"></canvas>
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdownMenu">
+            <Dropdown.Toggle variant="success" id="dropup">
               Session
             </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu">
+            <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
               {lectures.map((eachLecture, idx) => (
                 <Dropdown.Item 
                   key={idx}

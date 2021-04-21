@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Webcam from "react-webcam";
 import useInterval from "../Hooks/useInterval";
+import "./App.css";
 
 const videoConstraints = {
   width: 1280,
@@ -67,20 +68,21 @@ var WebcamCapture = () => {
       addToImageQueue();
     }
   }, timerLength);
-
+  //ui
   return (
     <div>
       <Webcam
-        style={{marginTop:"-150px", display:"block", marginLeft:"auto", marginRight:"auto"}}
+        style={{marginTop:"-130px", display:"block", marginLeft:"auto", marginRight:"auto"}}
         audio={false}
         height={500}
         width={500}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         videoConstraints={videoConstraints}
+
       />
-      <div
-        style={{marginTop:"-100px", display:"block", marginLeft:"auto", marginRight:"auto", width:"30%"}}>
+      <div id = "cam-text"
+        style={{marginTop:"-100px", display:"block", marginLeft:"auto", marginRight:"auto", width:"50%"}}>
         <h2>Collecting data...</h2>
         <p>Data is currently being collected for: <br></br>
           User ID: {userId} <br></br>

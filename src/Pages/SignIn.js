@@ -23,10 +23,10 @@ const SignIn = () => {
 
   
   return (
-    <div style={{ width: "50%" }}>
-      <Form>
+    <div class = "signin" >
+      <Form >
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -38,9 +38,9 @@ const SignIn = () => {
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          <Form.Check type="checkbox" label="Keep me logged in" />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={onSubmit}>
+        <Button id = "login-button" variant="primary" type="submit" onClick={onSubmit}>
           Submit
         </Button>
       </Form>
@@ -50,7 +50,7 @@ const SignIn = () => {
 <Redirect exact from="/" to="/teacherPage" />
           <Route component={TeacherPage} exact path="/teacherPage" />
       </Switch>
-       :(<div>idk</div>)}
+       :(<div></div>)}
     </div>
   );
 };

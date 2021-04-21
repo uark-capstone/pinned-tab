@@ -54,6 +54,27 @@
 
 .App-link {
   color: #61dafb;
+  
+}
+
+div {
+  font-family:'Roboto', sans-serif;
+
+}
+
+#cam-text {
+  font-family:'Roboto', sans-serif;
+  align-items: center;
+  
+  background-color: var(--red);
+  color: white;
+  border-radius: 10px 0px 10px 0px;
+  box-shadow: var(--pink) 0px 20px 0px 0px;
+  padding-bottom: 10px;
+  margin: 5px;
+  padding: 20px;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 @keyframes App-logo-spin {
@@ -69,60 +90,26 @@
 #login-button {
   display: flex;
   justify-content: center;
-  color: white;
+  margin:auto;
   font-family:'Roboto', sans-serif;
   border-radius: 0px 10px 0px 10px;
   background-color: teal;
-  border: 0px;
-  border-color: teal;
+  padding-left: 40%;
+  padding-right: 40%;
+
 }
 #login-button:hover {
 
   display: flex;
   justify-content: center;
   margin:auto;
-  color: white;
+
   border-radius: 0px 20px 0px 20px;
   background-color: var(--red);
   box-shadow: 0px 10px var(--pink);
   transition-timing-function: ease-in;
 
 }
-
-#submit-button {
-  display: flex;
-  justify-content: center;
-  margin:auto;
-  color: white;
-  font-family:'Roboto', sans-serif;
-  border-radius: 0px 10px 0px 10px;
-  background-color: teal;
-  border: 0px;
-  border-color: teal;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 20%;
-  padding-right: 20%;
-  
-}
-#submit-button:hover {
-
-  display: flex;
-  justify-content: left;
-  margin:auto;
-  color: white;
-  border-radius: 0px 20px 0px 20px;
-  background-color: var(--red);
-  box-shadow: 0px 10px var(--pink);
-  transition-timing-function: ease-in;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 20%;
-  padding-right: 20%;
-  
-}
-
-
 
 .form-control {
   font-family: 'Roboto' sans-serif;
@@ -141,3 +128,7 @@
   border-color: var(--pink)
 }
 
+#video {
+  background-color: #d518d5;
+  border-radius: 0px 30px 0px 30px;
+}
