@@ -68,7 +68,7 @@ var WebcamCapture = () => {
       addToImageQueue();
     }
   }, timerLength);
-
+  //ui
   return (
     <div>
       <Webcam
