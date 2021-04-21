@@ -19,6 +19,14 @@ import Chart from 'chart.js'
     'Actively Listening'
   ]
 
+  let hacked_users = [
+    'Allison',
+    'Caleb',
+    'Cassidy',
+    'Gage',
+    'Ryan'
+  ]
+
   // sort into dict for each user
   let data_dict = {}
   let labels = []
@@ -40,6 +48,7 @@ import Chart from 'chart.js'
     }else {
       data_dict[element.user_id] = {
         user_id: element.user_id,
+        name: (element.user_id <= hacked_users.length)? hacked_users[element.user_id - 1] : element.user_id,
         data: []
       }
       data_dict[element.user_id].data.push(data_entry)
@@ -76,7 +85,7 @@ import Chart from 'chart.js'
     let b = getRandomIntInclusive(0, 255).toString()
 
     data_sets.push({
-      label: data_dict[key].user_id,
+      label: data_dict[key].name,
       fill: false,
       borderColor: 'rgb(' + r + ',' + g + ',' + b + ')',
       data: data_dict[key].data
@@ -116,18 +125,14 @@ const HowYouDidPage = () => {
   const [lectureID, setLectureID] = useState(105);
 
   //CALLING HOOKS
-  const {
-    emotions,
-    isErrorAllEmotions,
-    isLoadedAllEmotions,
-  } = useEmotionsByLecture(lectureID);
+  let emotions = useEmotionsByLecture(lectureID);
   const {
     lectures,
     isAllLecturesError,
     isAllLecturesLoaded,
   } = useGetAllLectures();
 
-  let data = {}
+  let chart = null;
 
   useEffect(() =>{
     let emotion_values = [
@@ -136,12 +141,13 @@ const HowYouDidPage = () => {
       'Actively Listening'
     ]
 
-    data = {}
-    data = gatherData(emotions)
     var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    if (window.MyChart != undefined)
+      window.MyChart.destroy();
+
+    window.MyChart = new Chart(ctx, {
       type: 'line',
-      data: data,
+      data: gatherData(emotions),
       options: {
         responsive:true,
         maintainAspectRatio: false,
@@ -170,8 +176,11 @@ const HowYouDidPage = () => {
         }
       }
     });
-    console.log('data', data)
+    
+    console.log('data', window.MyChart.data)
+
   }, [emotions])
+
 
   return (
     <div>

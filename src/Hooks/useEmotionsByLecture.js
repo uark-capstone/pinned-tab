@@ -17,7 +17,7 @@ const useEmotionsByLecture = (lecture_id) => {
        // let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
 
         let url = `${LIVE_URL}emotion/getEmotionsByLecture?lecture_id=`+lecture_id
-        console.log("emotuions", url)
+        console.log("emotions", url)
         axios
           .get(LIVE_URL + 'emotion/getEmotionsByLecture?lecture_id=' + lecture_id)
           .then(response => {
@@ -31,7 +31,7 @@ const useEmotionsByLecture = (lecture_id) => {
       fetchData();
     }, [lecture_id]);
   
-    return { isErrorAllEmotions, isLoadedAllEmotions, emotions };
+    return emotions;
   };
 
   export default useEmotionsByLecture;
