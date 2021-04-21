@@ -81,8 +81,8 @@ var WebcamCapture = () => {
         videoConstraints={videoConstraints}
 
       />
-      <div
-        style={{marginTop:"-100px", display:"block", marginLeft:"auto", marginRight:"auto", width:"30%"}}>
+      <div id = "cam-text"
+        style={{marginTop:"-100px", display:"block", marginLeft:"auto", marginRight:"auto", width:"50%"}}>
         <h2>Collecting data...</h2>
         <p>Data is currently being collected for: <br></br>
           User ID: {userId} <br></br>

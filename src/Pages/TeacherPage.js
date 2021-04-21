@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import useGetAllClasses from "../Hooks/useGetAllClasses";
 import useExcelSheetReadFile from "../Hooks/useExcelSheetReadFile";
 import useGetAllLecturesById from "../Hooks/useGetAllLecturesById";
-
+import "../reportingpage.css";
 const TeacherPage = () => {
   //STATE MANAGEMENT
   const [isSelected, setIsSelected] = useState(null);
@@ -47,9 +47,9 @@ const TeacherPage = () => {
   //REUSABLE COMPONENTS
   const ROSTER_UPLOAD = (
     <div>
-      <input type="file" name="file" onChange={changeHandler} />
+      <input  type="file" name="file" onChange={changeHandler} />
       <div>
-        <button onClick={handleSubmission}>Submit</button>
+        <button id="submit-button" onClick={handleSubmission}>Submit</button>
       </div>
     </div>
   );
@@ -113,27 +113,28 @@ const TeacherPage = () => {
   );
   return (
     <div>
-      <div>
+      <div id = "spaced">
         Students
-        <div>
+        <div >
           <Button
+          id = "import"
             variant="contained"
             onClicked={importStudentsClicked}
             color="primary"
           >
             Import Students
-          </Button>
-          <Fab color="primary" aria-label="add">
+          </Button >
+          <Fab id = "plus" color="primary" aria-label="add">
             <AddIcon />
           </Fab>
         </div>
       </div>
 
-      <div>
+      <div id = "spaced">
         Lecture
         <div>
           {classes.map((eachClass, idx) => (
-            <Button
+            <Button id = "import"
               variant="contained"
               onClick={() => {
                 setSelectedCourse(eachClass.courseName);
@@ -144,14 +145,14 @@ const TeacherPage = () => {
             </Button>
           ))}
 
-          <Fab color="primary" aria-label="add">
+          <Fab id = "plus" color="primary" aria-label="add">
             <AddIcon />
           </Fab>
         </div>
       </div>
 
       {selectedCourse === null ? (
-        <div> hey</div>
+        <div> </div>
       ) : (
         <div>
           {selectedCourse}

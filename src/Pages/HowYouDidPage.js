@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
-import "../reportingpage.css";
 import { Dropdown } from "react-bootstrap";
+import "../reportingpage.css";
 import useEmotionsByLecture from "../Hooks/useEmotionsByLecture";
 import useGetAllLectures from "../Hooks/useGetAllLectures";
 
@@ -48,6 +48,7 @@ const settingDictionaries = (
   chartData,
   points
 ) => {
+
   var jsonData = emotions.sort((x, y) => (x.timestamp > y.timestamp ? 1 : -1));
 
   for (var i = 0; i < jsonData.length; i++) {
@@ -264,10 +265,10 @@ const HowYouDidPage = () => {
             <Line width="1" height="1" data={state} options={chartOptions} />
           </div>
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdownMenu">
+            <Dropdown.Toggle variant="success" id="dropup">
               Session
             </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu">
+            <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
               {lectures.map((eachLecture, idx) => (
                 <Dropdown.Item 
                   key={idx}

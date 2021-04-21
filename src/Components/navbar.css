@@ -51,22 +51,19 @@ border-color: black;
 }
 
 #dropdownMenu{
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: 'Roboto', sans-serif;
     border-radius: 10px 0px 10px 0px;
     box-shadow: var(--pink) 0px 10px 0px 0px;
     border-color: black;
 }
 #dropdownMenu:hover{
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: 'Roboto', sans-serif;
     border-radius: 5px 0px 5px 0px;
     box-shadow: var(--pink) 0px 4px 0px 0px;
     border-color: black;
 }
 #dropdownMenu:focus{
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+        font-family: 'Roboto', sans-serif;
     border-radius: 5px 0px 0px 0px;
     box-shadow: var(--pink) 0px 4px 0px 0px;
     border-color: var(--red);

@@ -69,26 +69,60 @@
 #login-button {
   display: flex;
   justify-content: center;
-  margin:auto;
+  color: white;
   font-family:'Roboto', sans-serif;
   border-radius: 0px 10px 0px 10px;
   background-color: teal;
-  padding-left: 40%;
-  padding-right: 40%;
-
+  border: 0px;
+  border-color: teal;
 }
 #login-button:hover {
 
   display: flex;
   justify-content: center;
   margin:auto;
-
+  color: white;
   border-radius: 0px 20px 0px 20px;
   background-color: var(--red);
   box-shadow: 0px 10px var(--pink);
   transition-timing-function: ease-in;
 
 }
+
+#submit-button {
+  display: flex;
+  justify-content: center;
+  margin:auto;
+  color: white;
+  font-family:'Roboto', sans-serif;
+  border-radius: 0px 10px 0px 10px;
+  background-color: teal;
+  border: 0px;
+  border-color: teal;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 20%;
+  padding-right: 20%;
+  
+}
+#submit-button:hover {
+
+  display: flex;
+  justify-content: left;
+  margin:auto;
+  color: white;
+  border-radius: 0px 20px 0px 20px;
+  background-color: var(--red);
+  box-shadow: 0px 10px var(--pink);
+  transition-timing-function: ease-in;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 20%;
+  padding-right: 20%;
+  
+}
+
+
 
 .form-control {
   font-family: 'Roboto' sans-serif;
