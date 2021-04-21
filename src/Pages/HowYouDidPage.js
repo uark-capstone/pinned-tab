@@ -120,7 +120,7 @@ const HowYouDidPage = () => {
     emotions,
     isErrorAllEmotions,
     isLoadedAllEmotions,
-  } = useEmotionsByLecture(105);
+  } = useEmotionsByLecture(lectureID);
   const {
     lectures,
     isAllLecturesError,
@@ -136,6 +136,7 @@ const HowYouDidPage = () => {
       'Actively Listening'
     ]
 
+    data = {}
     data = gatherData(emotions)
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
