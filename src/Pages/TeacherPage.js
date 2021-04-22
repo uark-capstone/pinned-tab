@@ -5,6 +5,14 @@ import Button from "@material-ui/core/Button";
 import { Form } from "react-bootstrap";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+
+
 import useGetAllClasses from "../Hooks/useGetAllClasses";
 import useExcelSheetReadFile from "../Hooks/useExcelSheetReadFile";
 import useGetAllLecturesById from "../Hooks/useGetAllLecturesById";
@@ -37,6 +45,20 @@ const TeacherPage = () => {
     setIsSelected(true);
   };
 
+  const [open, setOpen] = useState(false);
+  const [lectureSelected, setLectureSelected] = useState(null)
+  const handleChange = (event) => {
+    setLectureSelected(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleSubmission = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
@@ -49,7 +71,7 @@ const TeacherPage = () => {
     <div>
       <input  type="file" name="file" onChange={changeHandler} />
       <div>
-        <button id="submit-button" onClick={handleSubmission}>Submit</button>
+        <button  style={{ width: '5%' }}  id="submit-button" onClick={handleSubmission}>Submit</button>
       </div>
     </div>
   );
@@ -60,7 +82,7 @@ const TeacherPage = () => {
       <TextField
           label="Lecture Name"
           type="text"
-          defaultValue="2017-05-24T10:30"
+          defaultValue="Lecture Name"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -68,9 +90,9 @@ const TeacherPage = () => {
         />
         <TextField
           id="datetime-local"
-          label="Next appointment"
+          label="Date"
           type="date"
-          defaultValue="2017-05-24T10:30"
+          defaultValue="Date"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -101,14 +123,23 @@ const TeacherPage = () => {
 
   const LECTURE_SELECTOR = (
     <div>
-      <Form.Group controlId="exampleForm.ControlSelect2">
-        <Form.Label>Example multiple select</Form.Label>
-        <Form.Control as="select" multiple>
+        <FormControl  style={{ width: '50%' }} className={classes.formControl}>
+        <InputLabel id="demo-controlled-open-select-label">Select a Lecture</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={lectureSelected}
+          onChange={handleChange}
+        >
           {lecturesById.map((eachLecture, idx) => (
-            <option>{eachLecture.lectureName}</option>
+            <MenuItem value= {eachLecture.lectureName}> {eachLecture.lectureName} </MenuItem>
           ))}
-        </Form.Control>
-      </Form.Group>
+       
+        </Select>
+      </FormControl>
     </div>
   );
   return (
@@ -130,11 +161,13 @@ const TeacherPage = () => {
         </div>
       </div>
 
-      <div id = "spaced">
+      <div  style={{ width: '100%' }}  id = "spaced">
         Lecture
         <div>
           {classes.map((eachClass, idx) => (
-            <Button id = "import"
+            <Button 
+            style={{ width: '25%' , margin: '3%' }} 
+              id = "import"
               variant="contained"
               onClick={() => {
                 setSelectedCourse(eachClass.courseName);

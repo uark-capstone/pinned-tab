@@ -11,6 +11,8 @@ import "../reportingpage.css";
 import {
   BrowserRouter as Router,
   Redirect,
+  Switch,
+  Route
 } from "react-router-dom";
 
 
@@ -20,8 +22,9 @@ const NavigationBar = () => {
   const [isLoggingOut, setIsLoggingOut]=useState(false)
   useEffect(() => {
     // Update the document title using the browser API
-    if(localStorage.getItem('user')) 
+    if(localStorage.getItem('user')) {
       setIsLoggedIn(true)
+    }
 
     console.log("isLogged in", isLoggedIn)
   });
@@ -78,7 +81,11 @@ const NavigationBar = () => {
    <div>
    {NAV_BAR}
      </div> 
-    {isLoggingOut && <Redirect to="/" /> }
+     <Switch>
+          {/* {!isLoggedIn && <Redirect to="/" /> } */}
+          {!isLoggedIn && <Redirect exact path to="/" /> }
+     </Switch>
+ 
 
   </div>);
 };
