@@ -6,12 +6,11 @@ import { Form } from "react-bootstrap";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { useHistory } from "react-router-dom";
-
 
 import useGetAllClasses from "../Hooks/useGetAllClasses";
 import useExcelSheetReadFile from "../Hooks/useExcelSheetReadFile";
@@ -22,13 +21,17 @@ const TeacherPage = () => {
 
   //STATE MANAGEMENT
   const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
+  const [seletedCourseId, setSelectedCourseId] = useState(1);
   const [isSelected, setIsSelected] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [selectedCourseById, setSelectedCourseById] = useState(1)
+  const [selectedCourseById, setSelectedCourseById] = useState(1);
   const [formDataFinal, setFormDataFinal] = useState(null);
+
+
+  const [excelPath, setExcelPath]=useState( "classRoster/uploadClassRoster")
   //const [lectureByClassID, setLectureByClassID] = useState(null);
-  const axios = require('axios')
+  const axios = require("axios");
   //REACT HOOKS
   const { classes, isClassesError, isClassesLoaded } = useGetAllClasses(126);
   const {
@@ -38,25 +41,29 @@ const TeacherPage = () => {
   } = useGetAllLecturesById(selectedCourseById);
   const { result, error } = useExcelSheetReadFile(
     formDataFinal,
-    "classRoster/uploadClassRoster"
+    excelPath
   );
 
   //ONCHANGE FUNCTIONS
-  const importStudentsClicked = (e) => {};
-  const selectingCourse = (e) => {};
+  const importStudentsClicked = (e) => {
+
+  };
+  
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsSelected(true);
   };
 
   const [open, setOpen] = useState(false);
-  const [lectureSelected, setLectureSelected] = useState(null)
+  const [lectureSelected, setLectureSelected] = useState(null);
   const handleChange = (event) => {
     setLectureSelected(event.target.value);
 
-    let lecture = lecturesById.find(lecture => lecture.lectureName == event.target.value)
-    if(lecture){
-      history.push('/graph/' + lecture.id)
+    let lecture = lecturesById.find(
+      (lecture) => lecture.lectureName == event.target.value
+    );
+    if (lecture) {
+      history.push("/graph/" + lecture.id);
     }
   };
 
@@ -68,71 +75,101 @@ const TeacherPage = () => {
     setOpen(true);
   };
 
-  const handleSubmission = () => {
+  const handleSubmissionRoster = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
     console.log(formData);
+    setExcelPath("classRoster/uploadClassRoster")
+    setFormDataFinal(formData);
+  };
+
+  const handleSubmissionUsers = () => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    console.log(formData);
+    setExcelPath("user/uploadUsers")
     setFormDataFinal(formData);
   };
 
   //REUSABLE COMPONENTS
-  const ROSTER_UPLOAD = (
+
+  const IMPORT_STUDENTS = (
     <div>
-      <input id= "file" type="file" name="file" onChange={changeHandler} />
+      <input id="file" type="file" name="file" onChange={changeHandler} />
       <div>
-        <button  style={{ width: '5%' }}  id="submit-button" onClick={handleSubmission}>Submit</button>
+        <button
+          style={{ width: "5%" }}
+          id="submit-button"
+          onClick={handleSubmissionUsers}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
-  const [lectureName, setLectureName]= useState(null)
-  const onChangeLectureName=(event)=>{
+
+  const ROSTER_UPLOAD = (
+    <div>
+      <input id="file" type="file" name="file" onChange={changeHandler} />
+      <div>
+        <button
+          style={{ width: "5%" }}
+          id="submit-button"
+          onClick={handleSubmissionRoster}
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+  const [lectureName, setLectureName] = useState(null);
+  const onChangeLectureName = (event) => {
     setLectureName(event.target.value);
-  }
+  };
 
-  const [lectureDate, setLectureDate]= useState(null)
-  const onChangeLectureDate=(event)=>{
+  const [lectureDate, setLectureDate] = useState(null);
+  const onChangeLectureDate = (event) => {
     setLectureDate(event.target.value);
-  }
+  };
 
-  const [lectureStartTime, setLectureStartTime]= useState(null)
-  const onChangeLectureStart=(event)=>{
+  const [lectureStartTime, setLectureStartTime] = useState(null);
+  const onChangeLectureStart = (event) => {
     setLectureStartTime(event.target.value);
-  }
+  };
 
-  const [lectureEndTime, setLectureEndTime]= useState(null)
-  const onChangeLectureEnd=(event)=>{
+  const [lectureEndTime, setLectureEndTime] = useState(null);
+  const onChangeLectureEnd = (event) => {
     setLectureEndTime(event.target.value);
-  }
+  };
 
-  const addLecture =()=>{
-   console.log("CLICKEDDDDD WTF")
-    const URL= `${LIVE_URL}/lecture/addLecture`
+  const addLecture = () => {
+    console.log("CLICKEDDDDD WTF");
+    const URL = `${LIVE_URL}/lecture/addLecture`;
 
-  
-      const tempStart= lectureDate+" "+lectureStartTime+":00.000";
-      const tempEnd= lectureDate+" "+lectureEndTime+":00.000"
-      const lectureToBeAdded = {
-        class_id: `${selectedCourseById}`,
-        lectureName:`${lectureName}`,
-        lectureStartTime: `${tempStart}`,
-        lectureEndTime: `${tempEnd}`
-    }
-    console.log("lecture to be added", lectureToBeAdded)
-      axios.post(URL, lectureToBeAdded)
-          .then(response =>console.log("DID IT WORK", response))
-          .catch(err => {
-            // what now?
-            console.log(err);
-        });
-
-  }
+    const tempStart = lectureDate + " " + lectureStartTime + ":00.000";
+    const tempEnd = lectureDate + " " + lectureEndTime + ":00.000";
+    const lectureToBeAdded = {
+      class_id: `${selectedCourseById}`,
+      lectureName: `${lectureName}`,
+      lectureStartTime: `${tempStart}`,
+      lectureEndTime: `${tempEnd}`,
+    };
+    console.log("lecture to be added", lectureToBeAdded);
+    axios
+      .post(URL, lectureToBeAdded)
+      .then((response) => console.log("DID IT WORK", response))
+      .catch((err) => {
+        // what now?
+        console.log(err);
+      });
+  };
 
   const CREATE_LECTURE = (
     <div>
       <form className={classes.container} noValidate>
-      <TextField
-      value={lectureName}
-      onChange={onChangeLectureName}
+        <TextField
+          value={lectureName}
+          onChange={onChangeLectureName}
           label="Lecture Name"
           type="text"
           defaultValue="Lecture Name"
@@ -142,8 +179,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
-         value={lectureDate}
-         onChange={onChangeLectureDate}
+          value={lectureDate}
+          onChange={onChangeLectureDate}
           id="datetime-local"
           label="Date"
           type="date"
@@ -154,8 +191,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
-        value={lectureStartTime}
-        onChange={onChangeLectureStart}
+          value={lectureStartTime}
+          onChange={onChangeLectureStart}
           label="Start time"
           type="time"
           defaultValue="2017-05-24T10:30"
@@ -164,8 +201,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
-        value={lectureEndTime}
-        onChange={onChangeLectureEnd}
+          value={lectureEndTime}
+          onChange={onChangeLectureEnd}
           label="End time"
           type="time"
           defaultValue="2017-05-24T10:30"
@@ -174,9 +211,13 @@ const TeacherPage = () => {
             shrink: true,
           }}
         />
-       <div id = "slight-space">
-        <input onClick={addLecture} id="submit-button" type="submit" value="Submit"></input>
-       
+        <div id="slight-space">
+          <input
+            onClick={addLecture}
+            id="submit-button"
+            type="submit"
+            value="Submit"
+          ></input>
         </div>
       </form>
     </div>
@@ -184,8 +225,10 @@ const TeacherPage = () => {
 
   const LECTURE_SELECTOR = (
     <div>
-        <FormControl  style={{ width: '50%' }} className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Select a Lecture</InputLabel>
+      <FormControl style={{ width: "50%" }} className={classes.formControl}>
+        <InputLabel id="demo-controlled-open-select-label">
+          Select a Lecture
+        </InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
@@ -196,84 +239,76 @@ const TeacherPage = () => {
           onChange={handleChange}
         >
           {lecturesById.map((eachLecture, idx) => (
-            <MenuItem value= {eachLecture.lectureName}> {eachLecture.lectureName} </MenuItem>
+            <MenuItem value={eachLecture.lectureName}>
+              {" "}
+              {eachLecture.lectureName}{" "}
+            </MenuItem>
           ))}
-       
         </Select>
       </FormControl>
     </div>
   );
   return (
     <div>
-      <div id = "spaced" >
-        Students
-        <div >
-          <Button
-          id = "import"
-            variant="contained"
-            onClicked={importStudentsClicked}
-            color="primary"
-          >
-            Import Students
-          </Button >
-          <Fab id = "plus" color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
+      <div id="spaced">
+        Import Students
+        <div>
+          <div>
+            {IMPORT_STUDENTS}
+          </div>
+         
         </div>
       </div>
 
-      <div  style={{ width: '100%' }}  id = "spaced">
+      <div style={{ width: "100%" }} id="spaced">
         Lecture
         <div>
           {classes.map((eachClass, idx) => (
-            <Button 
-            style={{ width: '25%' , margin: '3%' }} 
-              id = "import"
+            <Button
+              style={{ width: "25%", margin: "3%" }}
+              id="import"
               variant="contained"
               onClick={() => {
-                console.log(eachClass)
-                setSelectedCourseId(eachClass.id)
+                console.log(eachClass);
+                setSelectedCourseId(eachClass.id);
                 setSelectedCourse(eachClass.courseName);
-                setSelectedCourseById(eachClass.id)
+                setSelectedCourseById(eachClass.id);
               }}
               color="primary"
             >
               {eachClass.courseName}
-              
             </Button>
           ))}
 
-          <Fab id = "plus" color="primary" aria-label="add">
+          <Fab id="plus" color="primary" aria-label="add">
             <AddIcon />
           </Fab>
         </div>
       </div>
-      
-        <div id = "class-header">
-          <div> </div>
-      {selectedCourse === null ? (
-        "\n"
 
-      ) : (
-        
-        <div id = "details">
-          {selectedCourse}
-          <div>
-          <div id = "sections2">
-            <h1 id = "sect"> roster upload</h1>
-            {ROSTER_UPLOAD}
-          </div>
-          <div id = "sections1">
-            <h1 id = "sect"> view a lecture </h1>
-            {LECTURE_SELECTOR}
+      <div id="class-header">
+        <div> </div>
+        {selectedCourse === null ? (
+          "\n"
+        ) : (
+          <div id="details">
+            {selectedCourse}
+            <div>
+              <div id="sections2">
+                <h1 id="sect"> roster upload</h1>
+                {ROSTER_UPLOAD}
+              </div>
+              <div id="sections1">
+                <h1 id="sect"> view a lecture </h1>
+                {LECTURE_SELECTOR}
+              </div>
+              <div id="sections">
+                <h1 id="sect"> create lecture </h1>
+                {CREATE_LECTURE}
+              </div>
             </div>
-            <div id = "sections">
-            <h1 id = "sect"> create lecture </h1>
-            {CREATE_LECTURE}
           </div>
-          </div>
-        </div>
-      )}
+        )}
       </div>
     </div>
   );

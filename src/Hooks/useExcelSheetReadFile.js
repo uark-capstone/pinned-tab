@@ -7,7 +7,8 @@ const useExcelSheetReadFile = (formData,  path) => {
     const [result, setResult] = useState("");
     const [error, setError] = useState("");
 	const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
-	const URL= `${LIVE_URL}classRoster/uploadClassRoster`
+	// const URL= `${LIVE_URL}classRoster/uploadClassRoster`
+	const URL= `${LIVE_URL}${path}`
     useEffect(() => {
       const fetchData = () => {
         fetch(
@@ -29,7 +30,7 @@ const useExcelSheetReadFile = (formData,  path) => {
       };
 
       fetchData();
-    }, [formData]);
+    }, [formData, path]);
   
     return { result, error};
   };
