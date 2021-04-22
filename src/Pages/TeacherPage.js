@@ -47,7 +47,7 @@ const TeacherPage = () => {
   //REUSABLE COMPONENTS
   const ROSTER_UPLOAD = (
     <div>
-      <input  type="file" name="file" onChange={changeHandler} />
+      <input id= "file" type="file" name="file" onChange={changeHandler} />
       <div>
         <button id="submit-button" onClick={handleSubmission}>Submit</button>
       </div>
@@ -93,8 +93,9 @@ const TeacherPage = () => {
             shrink: true,
           }}
         />
-       
-        <input type="submit" value="Submit"></input>
+       <div id = "slight-space">
+        <input id="submit-button" type="submit" value="Submit"></input>
+        </div>
       </form>
     </div>
   );
@@ -103,7 +104,7 @@ const TeacherPage = () => {
     <div>
       <Form.Group controlId="exampleForm.ControlSelect2">
         <Form.Label>Example multiple select</Form.Label>
-        <Form.Control as="select" multiple>
+        <Form.Control id = "form" as="select" multiple>
           {lecturesById.map((eachLecture, idx) => (
             <option>{eachLecture.lectureName}</option>
           ))}
@@ -150,24 +151,33 @@ const TeacherPage = () => {
           </Fab>
         </div>
       </div>
-
+      
+        <div id = "class-header">
+          <div> </div>
       {selectedCourse === null ? (
-        <div> </div>
+        "\n"
+
       ) : (
-        <div>
+        
+        <div id = "details">
           {selectedCourse}
           <div>
-            <h1> roster upload</h1>
+          <div id = "sections2">
+            <h1 id = "sect"> roster upload</h1>
             {ROSTER_UPLOAD}
-
-            <h1> view a lecture </h1>
+          </div>
+          <div id = "sections1">
+            <h1 id = "sect"> view a lecture </h1>
             {LECTURE_SELECTOR}
-            
-            <h1> create lecture </h1>
+            </div>
+            <div id = "sections">
+            <h1 id = "sect"> create lecture </h1>
             {CREATE_LECTURE}
+          </div>
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };
