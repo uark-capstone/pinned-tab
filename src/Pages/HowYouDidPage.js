@@ -66,6 +66,15 @@ import Chart from 'chart.js'
   let minDate = null;
   let maxDate = null;
 
+  let colors = [
+    'rgb(255,96,42)',
+    'rgb(42,72,255)',
+    'rgb(213,24,213)',
+    'rgb(0,128,128)',
+    'rgb(215,219,0)',
+  ]
+
+  let colorCounter = 0;
   for(var key in data_dict) {
     // let localMin = data_dict[key].data.reduce((min, p) => new Date(p.x) < new Date(min) ? p.x : min, new Date(data_dict[key].data.x));
     // let localMax = data_dict[key].data.reduce((max, p) => p.x > max ? p.x : max, data_dict[key].data.y);
@@ -81,16 +90,14 @@ import Chart from 'chart.js'
     //   maxDate = localMax
     // }
 
-    let r = getRandomIntInclusive(0, 255).toString()
-    let g = getRandomIntInclusive(0, 255).toString()
-    let b = getRandomIntInclusive(0, 255).toString()
-
     data_sets.push({
       label: data_dict[key].name,
       fill: false,
-      borderColor: 'rgb(' + r + ',' + g + ',' + b + ')',
+      borderColor: colors[colorCounter],
       data: data_dict[key].data
     })
+
+    colorCounter = (colorCounter + 1) % 5
 
   }
 
@@ -114,12 +121,6 @@ const generateLabels = (start, end, binning) => {
   }
 
   return labels;
-}
-
-const getRandomIntInclusive = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
 const HowYouDidPage = () => {
@@ -194,11 +195,11 @@ const HowYouDidPage = () => {
           align="center"
         >
           <canvas id="myChart" width="1" height="1"></canvas>
-          <Dropdown>
+          {/* <Dropdown>
             <Dropdown.Toggle variant="success" id="dropup">
               Session
             </Dropdown.Toggle>
-            {/* <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
+            <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
               {lectures.map((eachLecture, idx) => (
                 <Dropdown.Item 
                   key={idx}
@@ -206,8 +207,8 @@ const HowYouDidPage = () => {
                   {eachLecture.lectureName}
                 </Dropdown.Item>
               ))}
-            </Dropdown.Menu> */}
-          </Dropdown>
+            </Dropdown.Menu>
+          </Dropdown> */}
         </div>
       </div>
     </div>
