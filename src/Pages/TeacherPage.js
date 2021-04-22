@@ -145,7 +145,7 @@ const TeacherPage = () => {
   );
   return (
     <div>
-      <div id = "spaced">
+      <div id = "spaced" >
         Students
         <div >
           <Button
