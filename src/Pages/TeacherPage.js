@@ -24,6 +24,8 @@ const TeacherPage = () => {
   const [isSelected, setIsSelected] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourseId, setSelectedCourseId] = useState(6);
+
   const [formDataFinal, setFormDataFinal] = useState(null);
   const [lectureByClassID, setLectureByClassID] = useState(null);
 
@@ -33,7 +35,7 @@ const TeacherPage = () => {
     isAllLecturesByIdError,
     isAllLecturesByIdLoaded,
     lecturesById,
-  } = useGetAllLecturesById(6);
+  } = useGetAllLecturesById(selectedCourseId);
   const { result, error } = useExcelSheetReadFile(
     formDataFinal,
     "classRoster/uploadClassRoster"
@@ -178,6 +180,8 @@ const TeacherPage = () => {
               id = "import"
               variant="contained"
               onClick={() => {
+                console.log(eachClass)
+                setSelectedCourseId(eachClass.id)
                 setSelectedCourse(eachClass.courseName);
               }}
               color="primary"
