@@ -58,7 +58,7 @@ var PredictionTraining = () => {
       }
   
       axios
-        .post(ML_URL + 'predict', data)
+        .post(ML_URL + 'predict', data, { headers: {"Access-Control-Allow-Origin": "*" }})
         .then(response => {
           console.log('Predicted Response: ', response.data);
 
