@@ -11,7 +11,9 @@ const useEmotionsByLecture = (lecture_id) => {
     const [isLoadedAllEmotions, setIsLoaded] = useState(false);
     const [isErrorAllEmotions, setError] = useState(null);
   
+    //uncomment line 16 and 34 to see live
     useEffect(() => {
+      // const interval = setInterval(() => {
       const fetchData = () => {
         const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
        // let BACKEND_URL = (LIVE_URL) ? LIVE_URL : 'http://0.0.0.0:8080/';
@@ -28,7 +30,9 @@ const useEmotionsByLecture = (lecture_id) => {
             setError(error);
           });
       };
-      fetchData();
+ fetchData();
+// }, 5000);
+
     }, [lecture_id]);
   
     return emotions;
