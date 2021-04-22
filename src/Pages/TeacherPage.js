@@ -261,7 +261,7 @@ const TeacherPage = () => {
       </div>
 
       <div style={{ width: "100%" }} id="spaced">
-        Lecture
+        Classes
         <div>
           {classes.map((eachClass, idx) => (
             <Button
