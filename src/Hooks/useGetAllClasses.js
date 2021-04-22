@@ -15,6 +15,7 @@ const useGetAllClasses = (professorID) => {
         axios
           .get(url)
           .then(response => {
+            
             setIsLoaded(true);
             setClasses(response.data);
           })

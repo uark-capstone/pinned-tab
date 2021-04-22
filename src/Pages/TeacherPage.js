@@ -18,20 +18,23 @@ import useExcelSheetReadFile from "../Hooks/useExcelSheetReadFile";
 import useGetAllLecturesById from "../Hooks/useGetAllLecturesById";
 import "../reportingpage.css";
 const TeacherPage = () => {
+
   //STATE MANAGEMENT
+  const LIVE_URL = process.env.REACT_APP_BACKEND_URL;
   const [isSelected, setIsSelected] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourseById, setSelectedCourseById] = useState(1)
   const [formDataFinal, setFormDataFinal] = useState(null);
-  const [lectureByClassID, setLectureByClassID] = useState(null);
-
+  //const [lectureByClassID, setLectureByClassID] = useState(null);
+  const axios = require('axios')
   //REACT HOOKS
   const { classes, isClassesError, isClassesLoaded } = useGetAllClasses(126);
   const {
     isAllLecturesByIdError,
     isAllLecturesByIdLoaded,
     lecturesById,
-  } = useGetAllLecturesById(6);
+  } = useGetAllLecturesById(selectedCourseById);
   const { result, error } = useExcelSheetReadFile(
     formDataFinal,
     "classRoster/uploadClassRoster"
@@ -75,11 +78,55 @@ const TeacherPage = () => {
       </div>
     </div>
   );
+  const [lectureName, setLectureName]= useState(null)
+  const onChangeLectureName=(event)=>{
+    setLectureName(event.target.value);
+  }
+
+  const [lectureDate, setLectureDate]= useState(null)
+  const onChangeLectureDate=(event)=>{
+    setLectureDate(event.target.value);
+  }
+
+  const [lectureStartTime, setLectureStartTime]= useState(null)
+  const onChangeLectureStart=(event)=>{
+    setLectureStartTime(event.target.value);
+  }
+
+  const [lectureEndTime, setLectureEndTime]= useState(null)
+  const onChangeLectureEnd=(event)=>{
+    setLectureEndTime(event.target.value);
+  }
+
+  const addLecture =()=>{
+   console.log("CLICKEDDDDD WTF")
+    const URL= `${LIVE_URL}/lecture/addLecture`
+
+  
+      const tempStart= lectureDate+" "+lectureStartTime+":00.000";
+      const tempEnd= lectureDate+" "+lectureEndTime+":00.000"
+      const lectureToBeAdded = {
+        class_id: `${selectedCourseById}`,
+        lectureName:`${lectureName}`,
+        lectureStartTime: `${tempStart}`,
+        lectureEndTime: `${tempEnd}`
+    }
+    console.log("lecture to be added", lectureToBeAdded)
+      axios.post(URL, lectureToBeAdded)
+          .then(response =>console.log("DID IT WORK", response))
+          .catch(err => {
+            // what now?
+            console.log(err);
+        });
+
+  }
 
   const CREATE_LECTURE = (
     <div>
       <form className={classes.container} noValidate>
       <TextField
+      value={lectureName}
+      onChange={onChangeLectureName}
           label="Lecture Name"
           type="text"
           defaultValue="Lecture Name"
@@ -89,6 +136,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
+         value={lectureDate}
+         onChange={onChangeLectureDate}
           id="datetime-local"
           label="Date"
           type="date"
@@ -99,6 +148,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
+        value={lectureStartTime}
+        onChange={onChangeLectureStart}
           label="Start time"
           type="time"
           defaultValue="2017-05-24T10:30"
@@ -107,6 +158,8 @@ const TeacherPage = () => {
           }}
         />
         <TextField
+        value={lectureEndTime}
+        onChange={onChangeLectureEnd}
           label="End time"
           type="time"
           defaultValue="2017-05-24T10:30"
@@ -116,7 +169,8 @@ const TeacherPage = () => {
           }}
         />
        <div id = "slight-space">
-        <input id="submit-button" type="submit" value="Submit"></input>
+        <input onClick={addLecture} id="submit-button" type="submit" value="Submit"></input>
+       
         </div>
       </form>
     </div>
@@ -172,10 +226,12 @@ const TeacherPage = () => {
               variant="contained"
               onClick={() => {
                 setSelectedCourse(eachClass.courseName);
+                setSelectedCourseById(eachClass.id)
               }}
               color="primary"
             >
               {eachClass.courseName}
+              
             </Button>
           ))}
 
