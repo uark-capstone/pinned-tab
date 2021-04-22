@@ -10,7 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
+import { useHistory } from "react-router-dom";
 
 
 import useGetAllClasses from "../Hooks/useGetAllClasses";
@@ -18,6 +18,8 @@ import useExcelSheetReadFile from "../Hooks/useExcelSheetReadFile";
 import useGetAllLecturesById from "../Hooks/useGetAllLecturesById";
 import "../reportingpage.css";
 const TeacherPage = () => {
+  let history = useHistory();
+
   //STATE MANAGEMENT
   const [isSelected, setIsSelected] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -49,6 +51,11 @@ const TeacherPage = () => {
   const [lectureSelected, setLectureSelected] = useState(null)
   const handleChange = (event) => {
     setLectureSelected(event.target.value);
+
+    let lecture = lecturesById.find(lecture => lecture.lectureName == event.target.value)
+    if(lecture){
+      history.push('/graph/' + lecture.id)
+    }
   };
 
   const handleClose = () => {

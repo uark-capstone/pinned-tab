@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import { useParams } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import "../reportingpage.css";
 import useEmotionsByLecture from "../Hooks/useEmotionsByLecture";
@@ -122,9 +123,11 @@ const getRandomIntInclusive = (min, max) => {
 }
 
 const HowYouDidPage = () => {
-  const [lectureID, setLectureID] = useState(105);
+  let { lectureID } = useParams();
+  // const [lectureID, setLectureID] = useState(105);
 
   //CALLING HOOKS
+  console.log(lectureID)
   let emotions = useEmotionsByLecture(lectureID);
   const {
     lectures,
@@ -195,7 +198,7 @@ const HowYouDidPage = () => {
             <Dropdown.Toggle variant="success" id="dropup">
               Session
             </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
+            {/* <Dropdown.Menu className="dropdown-menu" id="dropup-menu">
               {lectures.map((eachLecture, idx) => (
                 <Dropdown.Item 
                   key={idx}
@@ -203,7 +206,7 @@ const HowYouDidPage = () => {
                   {eachLecture.lectureName}
                 </Dropdown.Item>
               ))}
-            </Dropdown.Menu>
+            </Dropdown.Menu> */}
           </Dropdown>
         </div>
       </div>
