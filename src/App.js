@@ -30,7 +30,7 @@ function App() {
           <Route path="/teacherPage">
             <TeacherPage />
           </Route>
-          <Route path="/graph">
+          <Route path="/graph/:lectureID">
             <HowYouDid />
           </Route>
           <Route path="/signIn">
